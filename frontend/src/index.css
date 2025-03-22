@@ -139,8 +139,11 @@
 body{
     @apply bg-[#09090B] ;
     @apply text-white
+    
 }
-
+html {
+  scroll-behavior: smooth;
+}
 
 @keyframes fadeIn {
   from {
@@ -176,3 +179,4 @@ body{
 .no-visible-scrollbar::-webkit-scrollbar {
   display: none;
 }
+

@@ -1,5 +1,6 @@
 import React from 'react';
-import { Github, Twitter, Linkedin, Mail, Calendar, MapPin, Code2 } from 'lucide-react';
+import {  Calendar, MapPin, Code2, Instagram } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const Footer: React.FC = () => {
   return (
@@ -16,11 +17,11 @@ const Footer: React.FC = () => {
             <p className="text-gray-400">Join us for the most exciting technical event of the year. Showcase your skills, learn from experts, and connect with fellow developers.</p>
             <div className="flex items-center gap-2 text-gray-400">
               <Calendar className="w-5 h-5 text-cyan-400" />
-              <span>March 15-17, 2025</span>
+              <span>April 16, 2025</span>
             </div>
             <div className="flex items-center gap-2 text-gray-400">
               <MapPin className="w-5 h-5 text-cyan-400" />
-              <span>Tech Hub Convention Center</span>
+              <span>Near H-block</span>
             </div>
           </div>
 
@@ -29,19 +30,19 @@ const Footer: React.FC = () => {
             <h3 className="text-xl font-semibold text-white">Quick Links</h3>
             <ul className="space-y-2">
               <li>
-                <a href="/register" className="hover:text-cyan-400 transition-colors">Register Now</a>
+                <Link to={'/events' }className="hover:text-cyan-400 transition-colors">Register Now</Link>
               </li>
               <li>
-                <a href="/schedule" className="hover:text-cyan-400 transition-colors">Event Schedule</a>
+              <Link to={'/events' }className="hover:text-cyan-400 transition-colors">Event Schedule</Link>
               </li>
               <li>
-                <a href="/speakers" className="hover:text-cyan-400 transition-colors">Speakers</a>
+              <Link to={'/events' }className="hover:text-cyan-400 transition-colors">Speakers</Link>
               </li>
               <li>
-                <a href="/workshops" className="hover:text-cyan-400 transition-colors">Workshops</a>
+              <Link to={'/events' }className="hover:text-cyan-400 transition-colors">Workshops</Link>
               </li>
               <li>
-                <a href="/sponsors" className="hover:text-cyan-400 transition-colors">Sponsors</a>
+              <Link to={'/events' }className="hover:text-cyan-400 transition-colors">Sponsors</Link>
               </li>
             </ul>
           </div>
@@ -50,23 +51,15 @@ const Footer: React.FC = () => {
           <div className="space-y-4">
             <h3 className="text-xl font-semibold text-white">Connect With Us</h3>
             <div className="flex gap-4">
-              <a href="https://github.com/vcode" className="hover:text-cyan-400 transition-colors">
-                <Github className="w-6 h-6" />
+              <a href="https://www.instagram.com/vcode.cse/" className="hover:text-cyan-400 transition-colors">
+                <Instagram className="w-6 h-6" />
               </a>
-              <a href="https://twitter.com/vcode" className="hover:text-cyan-400 transition-colors">
-                <Twitter className="w-6 h-6" />
-              </a>
-              <a href="https://linkedin.com/company/vcode" className="hover:text-cyan-400 transition-colors">
-                <Linkedin className="w-6 h-6" />
-              </a>
-              <a href="mailto:contact@vcode.event" className="hover:text-cyan-400 transition-colors">
-                <Mail className="w-6 h-6" />
-              </a>
+             
             </div>
             <div className="pt-4">
-              <a href="/contact" className="inline-block px-6 py-2 bg-cyan-500 hover:bg-cyan-600 text-white rounded-lg transition-colors">
+              <Link to={"/contact"} className="inline-block px-6 py-2 bg-cyan-500 hover:bg-cyan-600 text-white rounded-lg transition-colors">
                 Contact Us
-              </a>
+              </Link>
             </div>
           </div>
         </div>

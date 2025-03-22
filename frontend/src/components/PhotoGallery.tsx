@@ -11,38 +11,38 @@ interface Photo {
 const photos: Photo[] = [
   {
     id: 1,
-    url: "https://images.unsplash.com/photo-1682687220742-aba19b51f36e",
-    title: "Sunset vibes",
+    url: "https://res.cloudinary.com/dcalf4l66/image/upload/v1742479847/vcode2_xehlmn.jpg",
+    title: "Vcode- 2024",
     height: "h-[300px]"
   },
   {
     id: 2,
-    url: "https://images.unsplash.com/photo-1682687221038-404670bd5121",
-    title: "Mountain escape",
+    url: "https://res.cloudinary.com/dcalf4l66/image/upload/v1742479837/vcode1_phszk9.jpg",
+    title: "Vcode- 2024",
     height: "h-[400px]"
   },
   {
     id: 3,
-    url: "https://images.unsplash.com/photo-1682687220198-88e9bdea9931",
-    title: "Urban life",
+    url: "https://res.cloudinary.com/dcalf4l66/image/upload/v1742480746/Snapinst.app_435387734_3720768828194527_8913528035464886200_n_1080_ndnky2.jpg",
+    title: "Vcode- 2023",
     height: "h-[350px]"
   },
   {
     id: 4,
-    url: "https://images.unsplash.com/photo-1682687220067-dced0a5fbb6f",
-    title: "Nature's beauty",
+    url: "https://res.cloudinary.com/dcalf4l66/image/upload/v1742480807/Snapinst.app_347703829_266445905771382_6485048152007700123_n_1080_isjnhg.jpg",
+    title: "Vcode- 2023",
     height: "h-[280px]"
   },
   {
     id: 5,
-    url: "https://images.unsplash.com/photo-1682687220509-61b8a906ca19",
-    title: "City lights",
+    url: "https://res.cloudinary.com/dcalf4l66/image/upload/v1742480950/vcode_1_1_pewdb1.jpg",
+    title: "Vcode- 2024",
     height: "h-[320px]"
   },
   {
     id: 6,
-    url: "https://images.unsplash.com/photo-1682687220923-c58b9a4592ae",
-    title: "Beach day",
+    url: "https://res.cloudinary.com/dcalf4l66/image/upload/v1742489931/WhatsApp_Image_2025-03-20_at_22.27.36_e45450c3_cpd93g.jpg",
+    title: "Vcode- 2024",
     height: "h-[360px]"
   }
 ];
@@ -67,7 +67,7 @@ const PhotoGallery: React.FC = () => {
   return (
     <div className="p-6  min-h-screen">
       <h1 className="text-4xl font-bold text-center mb-8 text-cyan-400 tracking-wider">
-        Awesome Photo Gallery
+        Photo Gallery
       </h1>
       
       <div className="columns-1 md:columns-2 lg:columns-3 gap-4 mx-auto max-w-7xl">

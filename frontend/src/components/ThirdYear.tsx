@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import  { useState } from "react";
 import { Label } from "./ui/label";
 import { Input } from "./ui/input";
 import { cn } from "@/lib/utils";
@@ -36,14 +36,25 @@ export default function ThirdYear() {
 
   const [loading, setLoading] = useState(false);
 
-  const handleChange = (index, e) => {
+  interface FormData {
+    name: string;
+    email: string;
+    registrationNo: string;
+    phoneNo: string;
+    year: string;
+    section: string;
+  }
+
+  // Removed unnecessary HandleChangeEvent interface
+
+  const handleChange = (index: number, e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>): void => {
     const { name, value } = e.target;
-    const updatedData = [...formData];
-    updatedData[index][name] = value;
+    const updatedData: FormData[] = [...formData];
+    updatedData[index][name as keyof FormData] = value;
     setFormData(updatedData);
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
     e.preventDefault();
 
     for (const member of formData) {
@@ -60,9 +71,11 @@ export default function ThirdYear() {
       }
     }
 
+    // Removed unused ApiResponse interface
+
     try {
       setLoading(true);
-      const response = await axios.post("http://localhost:3000/api/register", {
+      await axios.post("https://vcode-m6ni.onrender.com/api/register", {
         eventName: "Hackathon",
         participants: formData,
       });
@@ -95,17 +108,20 @@ export default function ThirdYear() {
         },
       ]);
     } catch (error) {
-      toast.error(
-        "Registration failed. Please try again." + error.response.data.error
-      );
+      if (axios.isAxiosError(error) && error.response?.data?.error) {
+        toast.error(
+          "Registration failed. Please try again. " + error.response.data.error
+        );
+      } else {
+        toast.error("Registration failed. Please try again.");
+      }
     } finally {
       setLoading(false);
     }
   };
 
-  const sectionsForYear = {
-    2: ["A", "B", "C", "D", "E", "F", "G", "H", "I"],
-    3: ["A", "B", "C", "D", "E", "F"],
+  const sectionsForYear: Record<number, string[]> = {
+    3: ["A", "B", "C", "D", "E", "F", "G", "H", "I"],
   };
 
   return (
@@ -222,7 +238,7 @@ export default function ThirdYear() {
   );
 }
 
-const LabelInputContainer = ({ children, className }) => {
+const LabelInputContainer: React.FC<{ children: React.ReactNode; className?: string }> = ({ children, className }) => {
   return (
     <div className={cn("flex w-full flex-col space-y-2", className)}>
       {children}

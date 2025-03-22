@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState, ChangeEvent, FormEvent } from "react";
 import { Label } from "./ui/label";
 import { Input } from "./ui/input";
 import { cn } from "@/lib/utils";
@@ -6,23 +6,35 @@ import toast, { Toaster } from "react-hot-toast";
 import { ClipLoader } from "react-spinners";
 import axios from "axios";
 
+// Define types for form data
+interface Participant {
+  name: string;
+  email: string;
+  registrationNo: string;
+  phoneNo: string;
+  year: string;
+  section: string;
+}
+
 export default function CodeHuntForm() {
-  const [formData, setFormData] = useState([
+  const [formData, setFormData] = useState<Participant[]>([
     { name: "", email: "", registrationNo: "", phoneNo: "", year: "", section: "" },
     { name: "", email: "", registrationNo: "", phoneNo: "", year: "", section: "" },
     { name: "", email: "", registrationNo: "", phoneNo: "", year: "", section: "" },
   ]);
 
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState<boolean>(false);
 
-  const handleChange = (index, e) => {
+  const handleChange = (index: number, e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
-    const updatedData = [...formData];
-    updatedData[index][name] = value;
-    setFormData(updatedData);
+    setFormData((prevData) => {
+      const updatedData = [...prevData];
+      updatedData[index] = { ...updatedData[index], [name]: value };
+      return updatedData;
+    });
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     for (const member of formData) {
@@ -34,7 +46,7 @@ export default function CodeHuntForm() {
 
     try {
       setLoading(true);
-      const response = await axios.post("http://localhost:3000/api/register", {
+      await axios.post("https://vcode-m6ni.onrender.com/api/register", {
         eventName: "Code Hunt",
         participants: formData,
       });
@@ -45,16 +57,17 @@ export default function CodeHuntForm() {
         { name: "", email: "", registrationNo: "", phoneNo: "", year: "", section: "" },
         { name: "", email: "", registrationNo: "", phoneNo: "", year: "", section: "" },
       ]);
-    } catch (error) {
-      toast.error("Registration failed. Please try again." + error.response.data.error);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (error: any) {
+      toast.error("Registration failed. Please try again. " + (error.response?.data?.error || ""));
     } finally {
       setLoading(false);
     }
   };
 
-  const sectionsForYear = {
-    2: ["A", "B", "C", "D", "E", "F", "G", "H", "I"],
-    3: ["A", "B", "C", "D", "E", "F"],
+  const sectionsForYear: Record<string, string[]> = {
+    "2": ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S"],
+    "3": ["A", "B", "C", "D", "E", "F", "G", "H", "I"],
   };
 
   return (
@@ -66,7 +79,7 @@ export default function CodeHuntForm() {
 
       <form className="my-8" onSubmit={handleSubmit}>
         {formData.map((member, index) => (
-          <div key={index} className="mb-8 p-4 rounded-md border border-blue-400  text-white">
+          <div key={index} className="mb-8 p-4 rounded-md border border-blue-400 text-white">
             <h3 className="text-lg font-semibold mb-4">Member {index + 1}</h3>
 
             <LabelInputContainer className="mb-4">
@@ -129,7 +142,7 @@ export default function CodeHuntForm() {
               </select>
             </LabelInputContainer>
 
-            {member.year && (
+            {member.year && sectionsForYear[member.year] && (
               <LabelInputContainer className="mb-4">
                 <Label htmlFor={`section-${index}`}>Section</Label>
                 <select
@@ -141,7 +154,9 @@ export default function CodeHuntForm() {
                 >
                   <option value="">Select Section</option>
                   {sectionsForYear[member.year].map((sec) => (
-                    <option key={sec} value={sec}>{sec}</option>
+                    <option key={sec} value={sec}>
+                      {sec}
+                    </option>
                   ))}
                 </select>
               </LabelInputContainer>
@@ -162,9 +177,13 @@ export default function CodeHuntForm() {
   );
 }
 
+// Define props type for LabelInputContainer
+interface LabelInputContainerProps {
+  children: React.ReactNode;
+  className?: string;
+}
 
-
-const LabelInputContainer = ({ children, className }) => {
+const LabelInputContainer = ({ children, className }: LabelInputContainerProps) => {
   return <div className={cn("flex w-full flex-col space-y-2", className)}>{children}</div>;
 };
 

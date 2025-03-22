@@ -2,7 +2,7 @@ import { Vortex } from "./ui/vortex";
 
 export function VortexDemo() {
   return (
-    <div className="w-full mx-auto h-screen md:h-auto rounded-md p-10 sm:p-20 md:p-40 lg:p-72 overflow-hidden">
+    <div className="w-full mx-auto min-h-screen flex flex-col justify-center items-center rounded-md p-10 sm:p-20 md:p-40 lg:p-72 overflow-hidden">
       <Vortex
         backgroundColor="white"
         className="flex items-center justify-center px-2 md:px-10 py-4 w-full h-full text-7xl sm:text-5xl md:text-7xl lg:text-9xl henny-penny-regular text-white"
@@ -23,9 +23,9 @@ export function VortexDemo() {
           E
         </span>
       </Vortex>
-      <div className="flex justify-center">
-        <p className="text-lg md:text-3xl font-medium text-fuchsia-600  text-center px-6 md:px-24 lg:px-20  tracking-wide vt323-regular">
-          Participate and add value and certificate in your work and life.
+      <div className="flex justify-center mt-6 sm:mt-10">
+        <p className="text-base sm:text-xl md:text-2xl lg:text-2xl font-bold  text-cyan-400 text-center px-4 md:px-16 lg:px-32 leading-tight tracking-wide ">
+          Participate, enhance your skills, and earn certificates to add value to your work and life.
         </p>
       </div>
     </div>

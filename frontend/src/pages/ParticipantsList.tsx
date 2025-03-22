@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import  { useEffect, useState } from "react";
 interface Participant {
     name: string;
     email: string;
@@ -8,9 +8,9 @@ interface Participant {
     year: string;
   }
 const ParticipantsList = () => {
-  const [participants, setParticipants] = useState([]);
+  const [participants, setParticipants] = useState<{ eventName: string; participants: Participant[] }[]>([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchParticipants = async () => {
@@ -21,8 +21,8 @@ const ParticipantsList = () => {
         const data = await response.json();
         setParticipants(data);
         setLoading(false);
-      } catch (err:any) {
-        setError(err.message);
+      } catch (err) {
+        setError(err instanceof Error ? err.message : "An unknown error occurred");
         setLoading(false);
       }
     };
@@ -65,7 +65,7 @@ const ParticipantsList = () => {
             )
           ) : (
             <tr>
-              <td colSpan="7" className="text-center p-3">
+              <td colSpan={7} className="text-center p-3">
                 No participants registered yet.
               </td>
             </tr>

@@ -1,6 +1,6 @@
 import { Button } from "./ui/moving-border";
 
-export function MovingBorder({ name, isActive, onClick }) {
+export function MovingBorder({ name, isActive, onClick }: { name: string; isActive: boolean; onClick: () => void }) {
   return (
     <div>
       <Button

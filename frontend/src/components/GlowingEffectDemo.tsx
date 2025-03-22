@@ -2,6 +2,49 @@ import { BookOpen, Code, Cpu, PenTool, Search } from "lucide-react";
 import { GlowingEffect } from "@/components/ui/glowing-effect";
 import HeaderButton from "./HeaderButton";
 import { HoverBorder } from "./HoverBorderGradient";
+import { useState } from "react";
+import InfoModal from "./InfoModal";
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const eventDetails: Record<string, any> = {
+  "Poster Presentation": {
+    "Team Size": "Mandatory",
+    "Levels": "To be announced shortly",
+    "Venue": "To be announced shortly",
+    "Theme": "To be announced shortly",
+    "Submission Format": "Hard Copy",
+    "Payment": "Mandatory",
+  },
+  "CodeHunt": {
+    "Team Size": 3,
+    "Levels": 5,
+    "Venue": "To be announced shortly",
+    "Payment": "Mandatory",
+  },
+  "Hackathon": {
+    "Team Size": "3rd Years - 3, 2nd Years - 2 (Mandatory)",
+    "Levels": "To be announced shortly",
+    "Venue": "To be announced shortly",
+    "Duration": "24hrs Day and Night",
+    "Domain": "Web",
+    "Theme": "To be announced shortly",
+    "Payment": "Mandatory",
+  },
+  "Coding": {
+    "Team Size": 1,
+    "Levels": 3,
+    "Venue": "To be announced shortly",
+    "Allowed Languages": "C, C++, Java, Python",
+    "Payment": "Mandatory",
+  },
+  "Technical Quiz": {
+    "Team Size": 4,
+    "Levels": 1,
+    "Venue": "To be announced shortly",
+    "Topics": "OS, DBMS, Data Structures, Code Snippets",
+    "Payment": "Mandatory",
+  },
+};
 
 export function GlowingEffectDemo() {
   return (
@@ -64,42 +107,53 @@ interface GridItemProps {
 }
 
 const GridItem = ({ area, icon, title, description, img, url }: GridItemProps) => {
-  
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   return (
-    <li className={`min-h-[18rem] md:min-h-[16rem] lg:min-h-[14rem] list-none ${area} mx-5`}>
-      <div className="relative h-full rounded-2.5xl border p-2 md:rounded-3xl md:p-3">
-        <GlowingEffect
-          spread={100}
-          glow={true}
-          disabled={false}
-          proximity={64}
-          inactiveZone={0.01}
-        />
-        <div className="relative flex h-full flex-col justify-between gap-2 overflow-hidden rounded-xl border-0.75 p-6 dark:shadow-[0px_0px_27px_0px_#2D2D2D] md:p-3">
-          <div className="relative flex flex-1 flex-col justify-between">
-            <div className="flex items-center justify-between">
-              <div className="w-fit rounded-lg border border-gray-600 p-2">
-                {icon}
+    <>
+      <li className={`min-h-[18rem] md:min-h-[16rem] lg:min-h-[14rem] list-none ${area} mx-5`}>
+        <div className="relative h-full rounded-2.5xl border p-2 md:rounded-3xl md:p-3">
+          <GlowingEffect spread={100} glow={true} disabled={false} proximity={64} inactiveZone={0.01} />
+          <div className="relative flex h-full flex-col justify-between gap-2 overflow-hidden rounded-xl border-0.75 p-6 dark:shadow-[0px_0px_27px_0px_#2D2D2D] md:p-3">
+            <div className="relative flex flex-1 flex-col justify-between">
+              <div className="flex items-center justify-between">
+                <div className="w-fit rounded-lg border border-gray-600 p-2">{icon}</div>
+                <div className="w-fit rounded-lg border border-gray-600 p-2">
+                  <img src={img} alt="Event Logo" className="h-10 w-auto" />
+                </div>
               </div>
-              <div className="w-fit rounded-lg border border-gray-600 p-2">
-                <img src={img} alt="Event Logo" className="h-10 w-auto" />
+              <div className="space-y-3 flex-1">
+                <h3 className="pt-0.5 text-xl font-semibold font-sans text-gray-400 dark:text-gray-400">{title}</h3>
+                <h2 className="font-sans text-sm md:text-base text-gray-400 dark:text-neutral-400">{description}</h2>
               </div>
-            </div>
-            <div className="space-y-3 flex-1">
-              <h3 className="pt-0.5 text-xl font-semibold font-sans text-gray-400 dark:text-gray-400">
-                {title}
-              </h3>
-              <h2 className="font-sans text-sm md:text-base text-gray-400 dark:text-neutral-400">
-                {description}
-              </h2>
-            </div>
-            <div className="flex justify-between mt-4">
-              <HeaderButton url={url} />
-              <HoverBorder />
+              <div className="flex justify-between mt-4">
+                <HeaderButton url={url} />
+                <HoverBorder onClick={() => setIsModalOpen(true)} />
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </li>
+      </li>
+
+      {/* Dynamic Modal */}
+      <InfoModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        title={title}
+        description={
+          <>
+            <p>{description}</p>
+            <ul className="mt-2 text-sm text-gray-400">
+              {Object.entries(eventDetails[title] || {}).map(([key, value]) => (
+                <li key={key}>
+                  <strong>{key}:</strong> {String(value)}
+                </li>
+              ))}
+            </ul>
+          </>
+        }
+        img={img}
+      />
+    </>
   );
 };

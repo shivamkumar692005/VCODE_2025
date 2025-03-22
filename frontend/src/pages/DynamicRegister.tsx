@@ -10,7 +10,7 @@ const DynamicRegister = () => {
   const { event } = useParams();
     
   const renderForm = () => {
-    switch (event.toLowerCase()) {
+    switch (event?.toLowerCase() || "") {
       case "poster":
         return <PosterForm />;
       case "coding":

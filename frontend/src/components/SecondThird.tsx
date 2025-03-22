@@ -7,58 +7,92 @@ import { ClipLoader } from "react-spinners";
 import axios from "axios";
 
 export default function SecondThird() {
-  const [formData, setFormData] = useState([
-    { name: "", email: "", registrationNo: "", phoneNo: "", year: "", section: "" },
-    { name: "", email: "", registrationNo: "", phoneNo: "", year: "", section: "" },
-    { name: "", email: "", registrationNo: "", phoneNo: "", year: "", section: "" },
-    { name: "", email: "", registrationNo: "", phoneNo: "", year: "", section: "" },
-    { name: "", email: "", registrationNo: "", phoneNo: "", year: "", section: "" },
-  ]);
+  const [formData, setFormData] = useState(
+    Array(5).fill({
+      name: "",
+      email: "",
+      registrationNo: "",
+      phoneNo: "",
+      year: "" as "" | keyof typeof sectionsForYear,
+      section: "",
+    })
+  );
 
   const [loading, setLoading] = useState(false);
 
-  const handleChange = (index, e) => {
+  const handleChange = (
+    index: number,
+    e:
+      | React.ChangeEvent<HTMLInputElement>
+      | React.ChangeEvent<HTMLSelectElement>
+  ) => {
     const { name, value } = e.target;
     const updatedData = [...formData];
-    updatedData[index][name] = value;
+    updatedData[index] = { ...updatedData[index], [name]: value };
     setFormData(updatedData);
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
 
-    for (const member of formData) {
-      if (!member.name || !member.email || !member.registrationNo || !member.phoneNo || !member.year || !member.section) {
-        toast.error("All fields are required for every member.");
-        return;
-      }
+    if (formData.some((member) => Object.values(member).some((val) => !val))) {
+      toast.error("All fields are required for every member.");
+      return;
     }
 
     try {
       setLoading(true);
-      const response = await axios.post("http://localhost:3000/api/register", {
+      await axios.post("http://localhost:8000/api/register", {
         eventName: "Hackathon",
         participants: formData,
       });
 
       toast.success("Registration successful!");
-      setFormData([
-        { name: "", email: "", registrationNo: "", phoneNo: "", year: "", section: "" },
-        { name: "", email: "", registrationNo: "", phoneNo: "", year: "", section: "" },
-        { name: "", email: "", registrationNo: "", phoneNo: "", year: "", section: "" },
-        { name: "", email: "", registrationNo: "", phoneNo: "", year: "", section: "" },
-        { name: "", email: "", registrationNo: "", phoneNo: "", year: "", section: "" },
-      ]);
+      setFormData(
+        Array(5).fill({
+          name: "",
+          email: "",
+          registrationNo: "",
+          phoneNo: "",
+          year: "",
+          section: "",
+        })
+      );
     } catch (error) {
-      toast.error("Registration failed. Please try again." + error.response.data.error);
+      if (axios.isAxiosError(error) && error.response) {
+        toast.error("Registration failed: " + error.response.data.error);
+      } else {
+        console.error("An unexpected error occurred:", error);
+        toast.error("An unexpected error occurred.");
+      }
     } finally {
       setLoading(false);
     }
   };
 
   const sectionsForYear = {
-    2: ["A", "B", "C", "D", "E", "F", "G", "H", "I"],
-    3: ["A", "B", "C", "D", "E", "F"],
+    2: [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E",
+      "F",
+      "G",
+      "H",
+      "I",
+      "J",
+      "K",
+      "L",
+      "M",
+      "N",
+      "O",
+      "P",
+      "Q",
+      "R",
+      "S",
+    ],
+    3: ["A", "B", "C", "D", "E", "F", "G", "H", "I"],
   };
 
   return (
@@ -70,53 +104,26 @@ export default function SecondThird() {
 
       <form className="my-8" onSubmit={handleSubmit}>
         {formData.map((member, index) => (
-          <div key={index} className="mb-8 p-4 rounded-md border border-blue-400  text-white">
+          <div
+            key={index}
+            className="mb-8 p-4 rounded-md border border-blue-400 text-white"
+          >
             <h3 className="text-lg font-semibold mb-4">Member {index + 1}</h3>
 
-            <LabelInputContainer className="mb-4">
-              <Label htmlFor={`name-${index}`}>Name</Label>
-              <Input
-                id={`name-${index}`}
-                name="name"
-                placeholder="Enter your name"
-                value={member.name}
-                onChange={(e) => handleChange(index, e)}
-              />
-            </LabelInputContainer>
-
-            <LabelInputContainer className="mb-4">
-              <Label htmlFor={`email-${index}`}>Email Address</Label>
-              <Input
-                id={`email-${index}`}
-                name="email"
-                type="email"
-                placeholder="Enter your email"
-                value={member.email}
-                onChange={(e) => handleChange(index, e)}
-              />
-            </LabelInputContainer>
-
-            <LabelInputContainer className="mb-4">
-              <Label htmlFor={`registrationNo-${index}`}>Registration Number</Label>
-              <Input
-                id={`registrationNo-${index}`}
-                name="registrationNo"
-                placeholder="Enter your registration number"
-                value={member.registrationNo}
-                onChange={(e) => handleChange(index, e)}
-              />
-            </LabelInputContainer>
-
-            <LabelInputContainer className="mb-4">
-              <Label htmlFor={`phoneNo-${index}`}>Phone Number</Label>
-              <Input
-                id={`phoneNo-${index}`}
-                name="phoneNo"
-                placeholder="Enter your phone number"
-                value={member.phoneNo}
-                onChange={(e) => handleChange(index, e)}
-              />
-            </LabelInputContainer>
+            {["name", "email", "registrationNo", "phoneNo"].map((field) => (
+              <LabelInputContainer className="mb-4" key={field}>
+                <Label htmlFor={`${field}-${index}`}>
+                  {field.charAt(0).toUpperCase() + field.slice(1)}
+                </Label>
+                <Input
+                  id={`${field}-${index}`}
+                  name={field}
+                  placeholder={`Enter your ${field}`}
+                  value={member[field]}
+                  onChange={(e) => handleChange(index, e)}
+                />
+              </LabelInputContainer>
+            ))}
 
             <LabelInputContainer className="mb-4">
               <Label htmlFor={`year-${index}`}>Year</Label>
@@ -133,23 +140,28 @@ export default function SecondThird() {
               </select>
             </LabelInputContainer>
 
-            {member.year && (
-              <LabelInputContainer className="mb-4">
-                <Label htmlFor={`section-${index}`}>Section</Label>
-                <select
-                  id={`section-${index}`}
-                  name="section"
-                  value={member.section}
-                  onChange={(e) => handleChange(index, e)}
-                  className="w-full p-2 rounded-md border bg-neutral-900 text-white"
-                >
-                  <option value="">Select Section</option>
-                  {sectionsForYear[member.year].map((sec) => (
-                    <option key={sec} value={sec}>{sec}</option>
-                  ))}
-                </select>
-              </LabelInputContainer>
-            )}
+            {member.year &&
+              sectionsForYear[member.year as keyof typeof sectionsForYear] && (
+                <LabelInputContainer className="mb-4">
+                  <Label htmlFor={`section-${index}`}>Section</Label>
+                  <select
+                    id={`section-${index}`}
+                    name="section"
+                    value={member.section}
+                    onChange={(e) => handleChange(index, e)}
+                    className="w-full p-2 rounded-md border bg-neutral-900 text-white"
+                  >
+                    <option value="">Select Section</option>
+                    {sectionsForYear[
+                      member.year as keyof typeof sectionsForYear
+                    ].map((sec) => (
+                      <option key={sec} value={sec}>
+                        {sec}
+                      </option>
+                    ))}
+                  </select>
+                </LabelInputContainer>
+              )}
           </div>
         ))}
 
@@ -158,7 +170,11 @@ export default function SecondThird() {
           className="relative block h-10 w-full rounded-md bg-gradient-to-br from-black to-neutral-600 text-white cursor-pointer"
           disabled={loading}
         >
-          {loading ? <ClipLoader color="#ffffff" size={20} /> : "Submit Team Details →"}
+          {loading ? (
+            <ClipLoader color="#ffffff" size={20} />
+          ) : (
+            "Submit Team Details →"
+          )}
           <BottomGradient />
         </button>
       </form>
@@ -166,10 +182,14 @@ export default function SecondThird() {
   );
 }
 
-
-
-const LabelInputContainer = ({ children, className }) => {
-  return <div className={cn("flex w-full flex-col space-y-2", className)}>{children}</div>;
+const LabelInputContainer: React.FC<
+  React.PropsWithChildren<{ className?: string }>
+> = ({ children, className }) => {
+  return (
+    <div className={cn("flex w-full flex-col space-y-2", className)}>
+      {children}
+    </div>
+  );
 };
 
 const BottomGradient = () => {

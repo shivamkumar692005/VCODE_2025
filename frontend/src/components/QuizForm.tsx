@@ -1,117 +1,195 @@
-import React, { useState } from 'react';
-import { Label } from './ui/label';
-import { Input } from './ui/input';
-import { cn } from '@/lib/utils';
-import toast, { Toaster } from 'react-hot-toast';
-import { ClipLoader } from 'react-spinners';
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import React, { useState } from "react";
+import { Label } from "./ui/label";
+import { Input } from "./ui/input";
+import { cn } from "@/lib/utils";
+import toast, { Toaster } from "react-hot-toast";
+import { ClipLoader } from "react-spinners";
 
 export default function QuizForm() {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    registrationNo: '',
-    phoneNo: '',
-    section: '',
-    year: '',
-  });
+  const [formData, setFormData] = useState([
+    {
+      name: "",
+      email: "",
+      registrationNo: "",
+      phoneNo: "",
+      section: "",
+      year: "",
+    },
+    {
+      name: "",
+      email: "",
+      registrationNo: "",
+      phoneNo: "",
+      section: "",
+      year: "",
+    },
+    {
+      name: "",
+      email: "",
+      registrationNo: "",
+      phoneNo: "",
+      section: "",
+      year: "",
+    },
+    {
+      name: "",
+      email: "",
+      registrationNo: "",
+      phoneNo: "",
+      section: "",
+      year: "",
+    },
+  ]);
   const [loading, setLoading] = useState(false);
 
-  const handleChange = (e) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
+    index: number
+  ) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+    const updatedFormData = [...formData];
+    updatedFormData[index] = { ...updatedFormData[index], [name]: value };
+    setFormData(updatedFormData);
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
 
     try {
-      const response = await fetch('http://localhost:3000/api/register', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ eventName: 'Coding Challenge', participants: [formData] }),
+      const response = await fetch("https://vcode-m6ni.onrender.com/api/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          eventName: "Coding Challenge",
+          participants: formData,
+        }),
       });
 
       if (response.ok) {
-        toast.success('Registration successful!');
-        setFormData({
-          name: '',
-          email: '',
-          registrationNo: '',
-          phoneNo: '',
-          section: '',
-          year: '',
-        });
+        toast.success("Registration successful!");
+        setFormData([
+          {
+            name: "",
+            email: "",
+            registrationNo: "",
+            phoneNo: "",
+            section: "",
+            year: "",
+          },
+          {
+            name: "",
+            email: "",
+            registrationNo: "",
+            phoneNo: "",
+            section: "",
+            year: "",
+          },
+          {
+            name: "",
+            email: "",
+            registrationNo: "",
+            phoneNo: "",
+            section: "",
+            year: "",
+          },
+          {
+            name: "",
+            email: "",
+            registrationNo: "",
+            phoneNo: "",
+            section: "",
+            year: "",
+          },
+        ]);
       } else {
         const errorData = await response.json();
-        toast.error(errorData.error || 'Failed to register');
+        toast.error(errorData.error || "Failed to register");
       }
     } catch (error) {
-      toast.error('Something went wrong. Please try again.');
+      toast.error("Something went wrong. Please try again.");
     } finally {
       setLoading(false);
     }
   };
 
-  const sectionsForYear = {
-    2: ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I'],
-    3: ['A', 'B', 'C', 'D', 'E', 'F'],
+  const sectionsForYear: Record<number, string[]> = {
+    2: ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S"],
+    3: ["A", "B", "C", "D", "E", "F", "G", "H", "I"],
   };
 
   return (
-    <div className='shadow-input mx-auto w-full max-w-lvh rounded-none p-4 md:rounded-2xl md:p-8 dark:bg-black'>
-      <Toaster position='top-right' />
-      <h2 className='text-xl font-bold text-neutral-100 dark:text-neutral-200'>Participate in the Coding Challenge</h2>
+    <div className="shadow-input mx-auto w-full max-w-lvh rounded-none p-4 md:rounded-2xl md:p-8 dark:bg-black">
+      <Toaster position="top-right" />
+      <h2 className="text-xl font-bold text-neutral-100 dark:text-neutral-200">
+        Participate in the Coding Challenge (Team of 3)
+      </h2>
 
-      <form className='my-8' onSubmit={handleSubmit}>
-        {['name', 'email', 'registrationNo', 'phoneNo'].map((field) => (
-          <LabelInputContainer key={field} className='mb-4'>
-            <Label htmlFor={field}>{field.charAt(0).toUpperCase() + field.slice(1)}</Label>
-            <Input
-              id={field}
-              name={field}
-              placeholder={`Enter your ${field}`}
-              value={formData[field]}
-              onChange={handleChange}
-            />
-          </LabelInputContainer>
+      <form className="my-8" onSubmit={handleSubmit}>
+        {formData.map((member, index) => (
+          <div key={index} className="border-b border-gray-600 pb-6 mb-6">
+            <h3 className="text-lg font-semibold text-white mb-2">
+              Member {index + 1}
+            </h3>
+
+            {["name", "email", "registrationNo", "phoneNo"].map((field) => (
+              <LabelInputContainer key={field} className="mb-4">
+                <Label htmlFor={`${field}-${index}`}>
+                  {field.charAt(0).toUpperCase() + field.slice(1)}
+                </Label>
+                <Input
+                  id={`${field}-${index}`}
+                  name={field}
+                  placeholder={`Enter ${field}`}
+                  value={member[field as keyof typeof member]}
+                  onChange={(e) => handleChange(e, index)}
+                />
+              </LabelInputContainer>
+            ))}
+
+            <LabelInputContainer className="mb-4">
+              <Label htmlFor={`year-${index}`}>Year</Label>
+              <select
+                id={`year-${index}`}
+                name="year"
+                value={member.year}
+                onChange={(e) => handleChange(e, index)}
+                className="w-full p-2 rounded-md border bg-neutral-900 text-white"
+              >
+                <option value="">Select Year</option>
+                <option value="2">2nd Year</option>
+                <option value="3">3rd Year</option>
+              </select>
+            </LabelInputContainer>
+
+            {member.year && sectionsForYear[+member.year] && (
+              <LabelInputContainer className="mb-4">
+                <Label htmlFor={`section-${index}`}>Section</Label>
+                <select
+                  id={`section-${index}`}
+                  name="section"
+                  value={member.section}
+                  onChange={(e) => handleChange(e, index)}
+                  className="w-full p-2 rounded-md border bg-neutral-900 text-white"
+                >
+                  <option value="">Select Section</option>
+                  {sectionsForYear[+member.year].map((sec) => (
+                    <option key={sec} value={sec}>
+                      {sec}
+                    </option>
+                  ))}
+                </select>
+              </LabelInputContainer>
+            )}
+          </div>
         ))}
 
-        <LabelInputContainer className='mb-4'>
-          <Label htmlFor='year'>Year</Label>
-          <select
-            id='year'
-            name='year'
-            value={formData.year}
-            onChange={handleChange}
-            className='w-full p-2 rounded-md border bg-neutral-900 text-white'
-          >
-            <option value=''>Select Year</option>
-            <option value='2'>2nd Year</option>
-            <option value='3'>3rd Year</option>
-          </select>
-        </LabelInputContainer>
-
-        {formData.year && (
-          <LabelInputContainer className='mb-4'>
-            <Label htmlFor='section'>Section</Label>
-            <select
-              id='section'
-              name='section'
-              value={formData.section}
-              onChange={handleChange}
-              className='w-full p-2 rounded-md border bg-neutral-900 text-white'
-            >
-              <option value=''>Select Section</option>
-              {sectionsForYear[formData.year]?.map((sec) => (
-                <option key={sec} value={sec}>{sec}</option>
-              ))}
-            </select>
-          </LabelInputContainer>
-        )}
-
-        <button type='submit' className='relative block h-10 w-full rounded-md bg-gradient-to-br from-black to-neutral-600 text-white'>
-          {loading ? <ClipLoader color='#fff' size={20} /> : 'Register →'}
+        <button
+          type="submit"
+          className="relative block h-10 w-full rounded-md bg-gradient-to-br from-black to-neutral-600 text-white"
+        >
+          {loading ? <ClipLoader color="#fff" size={20} /> : "Register →"}
           <BottomGradient />
         </button>
       </form>
@@ -119,11 +197,7 @@ export default function QuizForm() {
   );
 }
 
-
-
-
 // LabelInputContainer, Label, Input components should be defined or imported accordingly.
-
 
 const BottomGradient = () => {
   return (

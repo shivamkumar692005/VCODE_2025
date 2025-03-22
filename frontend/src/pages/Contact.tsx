@@ -1,5 +1,11 @@
-import React from 'react';
-import { Users, Code2, Brain, Presentation as PresentationScreen, Terminal } from 'lucide-react';
+import React from "react";
+import {
+  Users,
+  Code2,
+  Brain,
+  Presentation as PresentationScreen,
+  Terminal,
+} from "lucide-react";
 
 interface Volunteer {
   name: string;
@@ -22,11 +28,11 @@ function Contact() {
       icon: <Code2 className="w-8 h-8" />,
       color: "from-purple-600 to-indigo-600",
       volunteers: [
-        { name: "Alex Johnson", role: "Lead Coordinator", email: "alex.j@vcode.com", phone: "+1 (555) 101-2301" },
-        { name: "Sarah Chen", role: "Technical Support", email: "sarah.c@vcode.com", phone: "+1 (555) 101-2302" },
-        { name: "Mike Ross", role: "Assistant Coordinator", email: "mike.r@vcode.com", phone: "+1 (555) 101-2303" },
-        { name: "Emma Wilson", role: "Registration Lead", email: "emma.w@vcode.com", phone: "+1 (555) 101-2304" },
-        { name: "David Kim", role: "Event Support", email: "david.k@vcode.com", phone: "+1 (555) 101-2305" }
+        { name: "Mouneendra Vanka", role: "Lead Coordinator", email: "221FA04063@gamil.com", phone: "9948224580" },
+        { name: "Shivam Kumar", role: "Coordinator", email: "221FA04118@gmail.com", phone: "9390756186" },
+        { name: "Yaswanth Pothuri", role: "Coordinator", email: "221Fa04128@gmail.com", phone: "8096868869" },
+        { name: "Abhirama Raju", role: "Coordinator", email: "221FA04096@gmail.com", phone: "8919057567" },
+        { name: "Poorna Sai", role: "Coordinator", email: "221FA04150@gmail.com", phone: "7671936211" }
       ]
     },
     {
@@ -34,11 +40,11 @@ function Contact() {
       icon: <Terminal className="w-8 h-8" />,
       color: "from-red-600 to-orange-600",
       volunteers: [
-        { name: "Rachel Green", role: "Arena Manager", email: "rachel.g@vcode.com", phone: "+1 (555) 101-2306" },
-        { name: "Chris Evans", role: "Technical Judge", email: "chris.e@vcode.com", phone: "+1 (555) 101-2307" },
-        { name: "Lisa Wang", role: "Participant Support", email: "lisa.w@vcode.com", phone: "+1 (555) 101-2308" },
-        { name: "Tom Hardy", role: "Systems Admin", email: "tom.h@vcode.com", phone: "+1 (555) 101-2309" },
-        { name: "Nina Patel", role: "Challenge Designer", email: "nina.p@vcode.com", phone: "+1 (555) 101-2310" }
+        { name: "Mouneendra Vanka", role: "Lead Coordinator", email: "221FA04063@gamil.com", phone: "9948224580" },
+        { name: "Anushka Singh", role: "Coordinator", email: "221FA04505@gmail.com", phone: "9263256335" },
+        { name: "Manoj kumar", role: "Coordinator", email: "221Fa04095@gmail.com", phone: "9014850215" },
+        { name: "Chandana", role: "Coordinator", email: "221FA04099@gmail.com", phone: "7993086359" },
+        { name: "Poorna Sai", role: "Coordinator", email: "221FA04150@gmail.com", phone: "7671936211" }
       ]
     },
     {
@@ -46,11 +52,11 @@ function Contact() {
       icon: <Brain className="w-8 h-8" />,
       color: "from-green-600 to-teal-600",
       volunteers: [
-        { name: "James Wilson", role: "Quiz Master", email: "james.w@vcode.com", phone: "+1 (555) 101-2311" },
-        { name: "Sophia Lee", role: "Question Curator", email: "sophia.l@vcode.com", phone: "+1 (555) 101-2312" },
-        { name: "Ryan Cooper", role: "Score Keeper", email: "ryan.c@vcode.com", phone: "+1 (555) 101-2313" },
-        { name: "Maya Singh", role: "Technical Verifier", email: "maya.s@vcode.com", phone: "+1 (555) 101-2314" },
-        { name: "Kevin Zhang", role: "Support Staff", email: "kevin.z@vcode.com", phone: "+1 (555) 101-2315" }
+        { name: "Mouneendra Vanka", role: "Lead Coordinator", email: "221FA04063@gamil.com", phone: "9948224580" },
+        { name: "Srilatha Reddy", role: "Coordinator", email: "221FA04135@gmail.com", phone: "7601059546" },
+        { name: "Manoj kumar", role: "Coordinator", email: "221Fa04095@gmail.com", phone: "9014850215" },
+        { name: "Sai Kiran", role: "Coordinator", email: "221FA04156@gmail.com", phone: "6281381153" },
+        { name: "Prasanth Kumar", role: "Coordinator", email: "221FA04421@gmail.com", phone: "7673928208" }
       ]
     },
     {
@@ -58,25 +64,25 @@ function Contact() {
       icon: <PresentationScreen className="w-8 h-8" />,
       color: "from-blue-600 to-cyan-600",
       volunteers: [
-        { name: "Emily Brown", role: "Presentation Lead", email: "emily.b@vcode.com", phone: "+1 (555) 101-2316" },
-        { name: "Daniel Park", role: "Layout Coordinator", email: "daniel.p@vcode.com", phone: "+1 (555) 101-2317" },
-        { name: "Anna Martinez", role: "Design Judge", email: "anna.m@vcode.com", phone: "+1 (555) 101-2318" },
-        { name: "Lucas Kim", role: "Technical Support", email: "lucas.k@vcode.com", phone: "+1 (555) 101-2319" },
-        { name: "Grace Liu", role: "Participant Guide", email: "grace.l@vcode.com", phone: "+1 (555) 101-2320" }
-      ]
+        { name: "Mouneendra Vanka", role: "Lead Coordinator", email: "221FA04063@gamil.com", phone: "9948224580" },
+       { name: "Poorna Sai", role: "Coordinator", email: "221FA04150@gmail.com", phone: "7671936211" },
+        { name: "Manoj kumar", role: "Coordinator", email: "221Fa04095@gmail.com", phone: "9014850215" },
+        { name: "Sai Kiran", role: "Coordinator", email: "221FA04156@gmail.com", phone: "6281381153" },
+        { name: "Prasanth Kumar", role: "Coordinator", email: "221FA04421@gmail.com", phone: "7673928208" }
+      ],
     },
     {
       name: "Hackathon",
       icon: <Users className="w-8 h-8" />,
       color: "from-pink-600 to-rose-600",
       volunteers: [
-        { name: "Mark Thompson", role: "Hackathon Director", email: "mark.t@vcode.com", phone: "+1 (555) 101-2321" },
-        { name: "Julia Chen", role: "Mentor Coordinator", email: "julia.c@vcode.com", phone: "+1 (555) 101-2322" },
-        { name: "Sam Rodriguez", role: "Technical Mentor", email: "sam.r@vcode.com", phone: "+1 (555) 101-2323" },
-        { name: "Olivia Kim", role: "Project Evaluator", email: "olivia.k@vcode.com", phone: "+1 (555) 101-2324" },
-        { name: "Peter Chang", role: "Resource Manager", email: "peter.c@vcode.com", phone: "+1 (555) 101-2325" }
-      ]
-    }
+        { name: "Mouneendra Vanka", role: "Lead Coordinator", email: "221FA04063@gamil.com", phone: "9948224580" },
+         { name: "Venkata Kamya", role: "Coordinator", email: "221FA04399@gmail.com", phone: "7993577382" },
+         { name: "Shivam Kumar", role: "Coordinator", email: "221FA04118@gmail.com", phone: "9390756186" },
+         { name: "Sai Kiran", role: "Coordinator", email: "221FA04156@gmail.com", phone: "6281381153" },
+         { name: "Divya Gupta", role: "Coordinator", email: "221FA04507@gmail.com", phone: "7857961610" }
+       ]
+    },
   ];
 
   return (
@@ -98,17 +104,19 @@ function Contact() {
               className="bg-gradient-to-b from-gray-900 to-black rounded-2xl p-6 transform hover:scale-105 transition-all duration-300 hover:shadow-2xl hover:shadow-purple-500/20 border border-gray-800"
               style={{
                 animation: `fadeIn 0.5s ease-out ${index * 0.2}s forwards`,
-                opacity: 0
+                opacity: 0,
               }}
             >
-              <div className={`flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-r ${section.color} mb-6 mx-auto shadow-lg shadow-purple-500/20 animate-bounce-slow`}>
+              <div
+                className={`flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-r ${section.color} mb-6 mx-auto shadow-lg shadow-purple-500/20 animate-bounce-slow`}
+              >
                 {section.icon}
               </div>
-              
+
               <h2 className="text-2xl font-bold text-center mb-6 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
                 {section.name}
               </h2>
-              
+
               <div className="space-y-4">
                 {section.volunteers.map((volunteer) => (
                   <div
@@ -118,7 +126,9 @@ function Contact() {
                     <h3 className="font-semibold text-lg group-hover:text-purple-400 transition-colors">
                       {volunteer.name}
                     </h3>
-                    <p className="text-gray-400 group-hover:text-gray-300">{volunteer.role}</p>
+                    <p className="text-gray-400 group-hover:text-gray-300">
+                      {volunteer.role}
+                    </p>
                     <div className="mt-2 text-sm space-y-1">
                       <p className="text-blue-400 hover:text-blue-300 transition-colors cursor-pointer">
                         {volunteer.email}
