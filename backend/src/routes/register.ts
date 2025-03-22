@@ -47,6 +47,18 @@ router.post("/", async (req: any, res: any) => {
       }
     }
 
+    for (const participant of participants) {
+      if (
+        participant.phoneNo.length !== 10 ||
+        participant.registrationNo.length !== 10 ||
+        !participant.phoneNo.match(/^\d+$/) 
+      ) {
+        return res.status(400).json({
+          error: "Invalid phone number or registration number. length should be 10",
+        });
+      }
+    }
+
     const registration = new EventRegistration({
       eventName,
       participants,
@@ -59,6 +71,7 @@ router.post("/", async (req: any, res: any) => {
       registration,
     });
   } catch (error: any) {
+    console.log(error);
     return res.status(500).json({ error: error.message });
   }
 });
