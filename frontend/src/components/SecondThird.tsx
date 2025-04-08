@@ -42,7 +42,7 @@ export default function SecondThird() {
 
     try {
       setLoading(true);
-      await axios.post("http://localhost:8000/api/register", {
+      await axios.post("https://vcode-m6ni.onrender.com/api/register", {
         eventName: "Hackathon",
         participants: formData,
       });

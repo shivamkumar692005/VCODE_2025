@@ -57,8 +57,13 @@ export default function SecondYear() {
         { name: "", email: "", registrationNo: "", phoneNo: "", year: "2", section: "" },
         { name: "", email: "", registrationNo: "", phoneNo: "", year: "2", section: "" },
       ]);
-    } catch {
-      toast.error("Registration failed. Please try again.");
+    } catch (error) {
+      if (axios.isAxiosError(error) && error.response) {
+        toast.error("Registration failed: " + error.response.data.error);
+      } else {
+        console.error("An unexpected error occurred:", error);
+        toast.error("An unexpected error occurred.");
+      }
     } finally {
       setLoading(false);
     }

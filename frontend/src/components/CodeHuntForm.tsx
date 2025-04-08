@@ -57,9 +57,13 @@ export default function CodeHuntForm() {
         { name: "", email: "", registrationNo: "", phoneNo: "", year: "", section: "" },
         { name: "", email: "", registrationNo: "", phoneNo: "", year: "", section: "" },
       ]);
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    } catch (error: any) {
-      toast.error("Registration failed. Please try again. " + (error.response?.data?.error || ""));
+    } catch (error) {
+      if (axios.isAxiosError(error) && error.response) {
+        toast.error("Registration failed: " + error.response.data.error);
+      } else {
+        console.error("An unexpected error occurred:", error);
+        toast.error("An unexpected error occurred.");
+      }
     } finally {
       setLoading(false);
     }

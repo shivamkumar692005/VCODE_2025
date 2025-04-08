@@ -1,33 +1,21 @@
 {
   "name": "backend",
   "version": "1.0.0",
-  "main": "dist/app.js",
+  "main": "app.js",
   "scripts": {
-    "start": "node dist/app.js",
-    "dev": "nodemon src/app.ts",
-    "build": "rm -rf dist && tsc",
-    "postinstall": "npm run build"
+    "start": "node app.js",
+    "dev": "nodemon src/app.ts"
   },
   "engines": {
     "node": ">=16.0.0"
   },
   "dependencies": {
-    "aws-lambda": "^1.0.7",
-    "aws-serverless-express": "^3.4.0",
     "cors": "^2.8.5",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
     "mongoose": "^8.12.1"
   },
   "devDependencies": {
-    "@types/aws-lambda": "^8.10.147",
-    "@types/aws-serverless-express": "^3.3.10",
-    "@types/cors": "^2.8.17",
-    "@types/express": "^5.0.0",
-    "@types/mongoose": "^5.11.96",
-    "@types/node": "^22.13.10",
-    "nodemon": "^3.1.9",
-    "ts-node": "^10.9.2",
-    "typescript": "^5.8.2"
+    "nodemon": "^3.1.9"
   }
 }

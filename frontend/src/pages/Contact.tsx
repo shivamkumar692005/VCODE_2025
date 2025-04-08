@@ -44,7 +44,7 @@ function Contact() {
         { name: "Anushka Singh", role: "Coordinator", email: "221FA04505@gmail.com", phone: "9263256335" },
         { name: "Manoj kumar", role: "Coordinator", email: "221Fa04095@gmail.com", phone: "9014850215" },
         { name: "Chandana", role: "Coordinator", email: "221FA04099@gmail.com", phone: "7993086359" },
-        { name: "Poorna Sai", role: "Coordinator", email: "221FA04150@gmail.com", phone: "7671936211" }
+        { name: "Suman Kumar", role: "Coordinator", email: "221FA04135@gmail.com", phone: "9262544404" }
       ]
     },
     {
@@ -54,7 +54,7 @@ function Contact() {
       volunteers: [
         { name: "Mouneendra Vanka", role: "Lead Coordinator", email: "221FA04063@gamil.com", phone: "9948224580" },
         { name: "Srilatha Reddy", role: "Coordinator", email: "221FA04135@gmail.com", phone: "7601059546" },
-        { name: "Manoj kumar", role: "Coordinator", email: "221Fa04095@gmail.com", phone: "9014850215" },
+        { name: "Akshay Kumar", role: "Coordinator", email: "221Fa040119@gmail.com", phone: "9162664202" },
         { name: "Sai Kiran", role: "Coordinator", email: "221FA04156@gmail.com", phone: "6281381153" },
         { name: "Prasanth Kumar", role: "Coordinator", email: "221FA04421@gmail.com", phone: "7673928208" }
       ]
@@ -65,10 +65,10 @@ function Contact() {
       color: "from-blue-600 to-cyan-600",
       volunteers: [
         { name: "Mouneendra Vanka", role: "Lead Coordinator", email: "221FA04063@gamil.com", phone: "9948224580" },
-       { name: "Poorna Sai", role: "Coordinator", email: "221FA04150@gmail.com", phone: "7671936211" },
-        { name: "Manoj kumar", role: "Coordinator", email: "221Fa04095@gmail.com", phone: "9014850215" },
-        { name: "Sai Kiran", role: "Coordinator", email: "221FA04156@gmail.com", phone: "6281381153" },
-        { name: "Prasanth Kumar", role: "Coordinator", email: "221FA04421@gmail.com", phone: "7673928208" }
+       { name: "Saketh", role: "Coordinator", email: "221FA04247@gmail.com", phone: "9381753288" },
+        { name: "Mokshagna", role: "Coordinator", email: "221Fa04256@gmail.com", phone: "7075439700" },
+        { name: "Gautham ", role: "Coordinator", email: "221FA04235@gmail.com", phone: "8106008373" },
+        { name: "Deepu kumar", role: "Coordinator", email: "221FA04468@gmail.com", phone: "8309216663" }
       ],
     },
     {
@@ -78,8 +78,8 @@ function Contact() {
       volunteers: [
         { name: "Mouneendra Vanka", role: "Lead Coordinator", email: "221FA04063@gamil.com", phone: "9948224580" },
          { name: "Venkata Kamya", role: "Coordinator", email: "221FA04399@gmail.com", phone: "7993577382" },
-         { name: "Shivam Kumar", role: "Coordinator", email: "221FA04118@gmail.com", phone: "9390756186" },
-         { name: "Sai Kiran", role: "Coordinator", email: "221FA04156@gmail.com", phone: "6281381153" },
+         { name: "sk. shafi", role: "Coordinator", email: "221FA04272@gmail.com", phone: "6309769793" },
+         { name: "Kirety", role: "Coordinator", email: "221FA04101@gmail.com", phone: "7382104555" },
          { name: "Divya Gupta", role: "Coordinator", email: "221FA04507@gmail.com", phone: "7857961610" }
        ]
     },

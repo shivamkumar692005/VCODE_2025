@@ -23,7 +23,7 @@ const photos: Photo[] = [
   },
   {
     id: 3,
-    url: "https://res.cloudinary.com/dcalf4l66/image/upload/v1742480746/Snapinst.app_435387734_3720768828194527_8913528035464886200_n_1080_ndnky2.jpg",
+    url: "https://res.cloudinary.com/dxs1ivzaa/image/upload/v1742622740/DSC01831-2_vqsnnr.jpg",
     title: "Vcode- 2023",
     height: "h-[350px]"
   },

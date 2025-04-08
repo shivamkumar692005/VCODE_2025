@@ -37,7 +37,9 @@ export default function PosterForm() {
 
   const [loading, setLoading] = useState(false);
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+  const handleChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
     const { name, value } = e.target;
     setFormData({
       ...formData,
@@ -66,13 +68,15 @@ export default function PosterForm() {
     setLoading(true);
 
     try {
-      const response = await axios.post("https://vcode-m6ni.onrender.com/api/register", formData);
+      const response = await axios.post(
+        "https://vcode-m6ni.onrender.com/api/register",
+        formData
+      );
       toast.success("Registration successful!");
       clearForm();
       console.log("Registration successful:", response.data);
     } catch (error) {
       if (axios.isAxiosError(error) && error.response) {
-        console.error("Registration failed:", error.response.data.error);
         toast.error("Registration failed: " + error.response.data.error);
       } else {
         console.error("An unexpected error occurred:", error);
@@ -84,30 +88,77 @@ export default function PosterForm() {
   };
 
   const sectionsForYear: Record<number, string[]> = {
-    2: ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S"],
+    2: [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E",
+      "F",
+      "G",
+      "H",
+      "I",
+      "J",
+      "K",
+      "L",
+      "M",
+      "N",
+      "O",
+      "P",
+      "Q",
+      "R",
+      "S",
+    ],
     3: ["A", "B", "C", "D", "E", "F", "G", "H", "I"],
   };
 
   return (
     <div className="shadow-input mx-auto w-full max-w-lvh rounded-none p-4 md:rounded-2xl md:p-8 dark:bg-black">
-      <h2 className="text-xl font-bold text-neutral-100 dark:text-neutral-200">Participate in this</h2>
+      <h2 className="text-xl font-bold text-neutral-100 dark:text-neutral-200">
+        Participate in this
+      </h2>
       <Toaster position="top-center" />
       <form className="my-8" onSubmit={handleSubmit}>
         <LabelInputContainer className="mb-4">
           <Label htmlFor="name">Name</Label>
-          <Input id="name" name="name" placeholder="Enter your name" value={formData.participants[0].name} onChange={handleChange} />
+          <Input
+            id="name"
+            name="name"
+            placeholder="Enter your name"
+            value={formData.participants[0].name}
+            onChange={handleChange}
+          />
         </LabelInputContainer>
         <LabelInputContainer className="mb-4">
           <Label htmlFor="email">Email Address</Label>
-          <Input id="email" name="email" type="email" placeholder="Enter your email" value={formData.participants[0].email} onChange={handleChange} />
+          <Input
+            id="email"
+            name="email"
+            type="email"
+            placeholder="Enter your email"
+            value={formData.participants[0].email}
+            onChange={handleChange}
+          />
         </LabelInputContainer>
         <LabelInputContainer className="mb-4">
           <Label htmlFor="registrationNo">Registration Number</Label>
-          <Input id="registrationNo" name="registrationNo" placeholder="Enter your registration number" value={formData.participants[0].registrationNo} onChange={handleChange} />
+          <Input
+            id="registrationNo"
+            name="registrationNo"
+            placeholder="Enter your registration number"
+            value={formData.participants[0].registrationNo}
+            onChange={handleChange}
+          />
         </LabelInputContainer>
         <LabelInputContainer className="mb-4">
           <Label htmlFor="phoneNo">Phone Number</Label>
-          <Input id="phoneNo" name="phoneNo" placeholder="Enter your phone number" value={formData.participants[0].phoneNo} onChange={handleChange} />
+          <Input
+            id="phoneNo"
+            name="phoneNo"
+            placeholder="Enter your phone number"
+            value={formData.participants[0].phoneNo}
+            onChange={handleChange}
+          />
         </LabelInputContainer>
         <LabelInputContainer className="mb-4">
           <Label htmlFor="year">Year</Label>
@@ -124,23 +175,30 @@ export default function PosterForm() {
           </select>
         </LabelInputContainer>
 
-        {formData.participants[0].year && sectionsForYear[+formData.participants[0].year as keyof typeof sectionsForYear] && (
-          <LabelInputContainer className="mb-4">
-            <Label htmlFor="section">Section</Label>
-            <select
-              id="section"
-              name="section"
-              value={formData.participants[0].section}
-              onChange={handleChange}
-              className="w-full p-2 rounded-md border bg-neutral-900 text-white"
-            >
-              <option value="">Select Section</option>
-              {sectionsForYear[+formData.participants[0].year as keyof typeof sectionsForYear].map((sec) => (
-                <option key={sec} value={sec}>{sec}</option>
-              ))}
-            </select>
-          </LabelInputContainer>
-        )}
+        {formData.participants[0].year &&
+          sectionsForYear[
+            +formData.participants[0].year as keyof typeof sectionsForYear
+          ] && (
+            <LabelInputContainer className="mb-4">
+              <Label htmlFor="section">Section</Label>
+              <select
+                id="section"
+                name="section"
+                value={formData.participants[0].section}
+                onChange={handleChange}
+                className="w-full p-2 rounded-md border bg-neutral-900 text-white"
+              >
+                <option value="">Select Section</option>
+                {sectionsForYear[
+                  +formData.participants[0].year as keyof typeof sectionsForYear
+                ].map((sec) => (
+                  <option key={sec} value={sec}>
+                    {sec}
+                  </option>
+                ))}
+              </select>
+            </LabelInputContainer>
+          )}
 
         <button
           className="relative h-10 w-full rounded-md bg-gradient-to-br from-black to-neutral-600 font-medium text-white flex justify-center items-center"
@@ -164,6 +222,16 @@ const BottomGradient = () => (
 );
 
 // Wrapper for label and input
-const LabelInputContainer = ({ children, className }: { children: React.ReactNode; className?: string }) => {
-  return <div className={cn("flex w-full flex-col space-y-2", className)}>{children}</div>;
+const LabelInputContainer = ({
+  children,
+  className,
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) => {
+  return (
+    <div className={cn("flex w-full flex-col space-y-2", className)}>
+      {children}
+    </div>
+  );
 };

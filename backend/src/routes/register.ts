@@ -7,7 +7,7 @@ const eventParticipants: { [key: string]: number } = {
   "Coding Challenge": 1,
   "Hackathon": 5,
   "Poster Presentation": 1,
-  "Technical Quiz": 1,
+  "Technical Quiz": 4,
   "Code Hunt": 3,
 };
 

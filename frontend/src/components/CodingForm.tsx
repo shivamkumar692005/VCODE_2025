@@ -57,10 +57,14 @@ export default function CodingForm() {
         section: "",
         year: "",
       });
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+
     } catch (error) {
-      console.log(error);
-      toast.error("Registration failed! Please try again.");
+      if (axios.isAxiosError(error) && error.response) {
+        toast.error("Registration failed: " + error.response.data.error);
+      } else {
+        console.error("An unexpected error occurred:", error);
+        toast.error("An unexpected error occurred.");
+      }
     } finally {
       setLoading(false);
     }

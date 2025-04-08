@@ -1,10 +1,11 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useState } from "react";
 import { Label } from "./ui/label";
 import { Input } from "./ui/input";
 import { cn } from "@/lib/utils";
 import toast, { Toaster } from "react-hot-toast";
 import { ClipLoader } from "react-spinners";
+import axios from "axios";
+
 
 export default function QuizForm() {
   const [formData, setFormData] = useState([
@@ -58,16 +59,13 @@ export default function QuizForm() {
     setLoading(true);
 
     try {
-      const response = await fetch("https://vcode-m6ni.onrender.com/api/register", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          eventName: "Coding Challenge",
-          participants: formData,
-        }),
+       await axios.post("https://vcode-m6ni.onrender.com/api/register", {
+        eventName: "Technical Quiz",
+        participants: formData,
       });
+    
 
-      if (response.ok) {
+     
         toast.success("Registration successful!");
         setFormData([
           {
@@ -103,12 +101,13 @@ export default function QuizForm() {
             year: "",
           },
         ]);
-      } else {
-        const errorData = await response.json();
-        toast.error(errorData.error || "Failed to register");
-      }
+      
     } catch (error) {
-      toast.error("Something went wrong. Please try again.");
+      if (axios.isAxiosError(error) && error.response) {
+        toast.error("Registration failed: " + error.response.data.error);
+      } else {
+        toast.error("An unexpected error occurred.");
+      }
     } finally {
       setLoading(false);
     }

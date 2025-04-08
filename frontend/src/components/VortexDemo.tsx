@@ -24,7 +24,7 @@ export function VortexDemo() {
         </span>
       </Vortex>
       <div className="flex justify-center mt-6 sm:mt-10">
-        <p className="text-base sm:text-xl md:text-2xl lg:text-2xl font-bold  text-cyan-400 text-center px-4 md:px-16 lg:px-32 leading-tight tracking-wide ">
+        <p className="text-base sm:text-xl md:text-2xl lg:text-2xl font-bold  text-white text-center px-4 md:px-16 lg:px-32 leading-tight tracking-wide ">
           Participate, enhance your skills, and earn certificates to add value to your work and life.
         </p>
       </div>

@@ -108,12 +108,11 @@ export default function ThirdYear() {
         },
       ]);
     } catch (error) {
-      if (axios.isAxiosError(error) && error.response?.data?.error) {
-        toast.error(
-          "Registration failed. Please try again. " + error.response.data.error
-        );
+      if (axios.isAxiosError(error) && error.response) {
+        toast.error("Registration failed: " + error.response.data.error);
       } else {
-        toast.error("Registration failed. Please try again.");
+        console.error("An unexpected error occurred:", error);
+        toast.error("An unexpected error occurred.");
       }
     } finally {
       setLoading(false);

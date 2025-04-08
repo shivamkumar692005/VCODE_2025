@@ -10,7 +10,7 @@ const Header = () => {
     <nav className="w-full h-auto p-4 bg-transparent text-white flex items-center justify-between sticky top-0 z-50 backdrop-blur-md">
       {/* Logo */}
       <div className="w-28 h-8">
-        <img src="/logo.png" alt="Logo" className="w-full h-full" />
+        <img src="https://res.cloudinary.com/dcalf4l66/image/upload/v1742632868/logo_udb1an.png" alt="Logo" className="w-full h-full" />
       </div>
 
       {/* Desktop Navigation Links */}
@@ -31,6 +31,7 @@ const Header = () => {
       {menuOpen && (
         <div className="absolute top-12 right-4 bg-black text-white p-4 rounded-lg shadow-lg flex flex-col gap-4 md:hidden">
           <Link to="/" className="hover:text-blue-400 px-3 py-2 rounded-md" onClick={() => setMenuOpen(false)}>Home</Link>
+          <Link to="/events" className="hover:text-blue-400 px-3 py-2 rounded-md" onClick={() => setMenuOpen(false)}>Rgister</Link>
           <Link to="/events" className="hover:text-blue-400 px-3 py-2 rounded-md" onClick={() => setMenuOpen(false)}>Events</Link>
           <Link to="/contact" className="hover:text-blue-400 px-3 py-2 rounded-md" onClick={() => setMenuOpen(false)}>Contact Us</Link>
         </div>
