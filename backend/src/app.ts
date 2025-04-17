@@ -2,6 +2,7 @@ import mongoose from "mongoose";
 import express from "express";
 import registerRoute from "./routes/register";
 import EventRegistration from "./models/EventRegistration";
+import HackathonRoute from "./routes/hackathon";
 import cors from "cors";
 import dotenv from "dotenv";
 
@@ -31,15 +32,8 @@ app.get("/", (req, res) => {
   res.send("Hello World!");
 })
 
+app.use("/api/hackathon", HackathonRoute);
 
-app.get("/adminshivam", async (req, res) => {
-    try {
-      const registrations = await EventRegistration.find(); 
-      res.status(200).json(registrations);
-    } catch (error) {
-      res.status(500).json({ error: "Failed to fetch participants" });
-    }
-  });
 
 app.use('/api/register', registerRoute);
 
